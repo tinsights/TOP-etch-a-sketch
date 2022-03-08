@@ -1,4 +1,5 @@
 const DEFAULTBG = '#ffffff';
+const GRIDSIZE = 16;
 
 let mouseDown = false;
 document.body.onmousedown = () => mouseDown = true;
