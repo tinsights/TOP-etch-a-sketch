@@ -1,18 +1,32 @@
-* {
+html {
   box-sizing: border-box;
 }
-
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 #flex-container {
   display: flex;
+  padding: 50px;
   border: 2px solid black;
   justify-content: center;
 }
 
 #grid-container {
   border: 1px solid black;
-  width: 960px;
   display: flex;
   flex-direction: column;
+}
+
+#sidebar {
+  margin: 0 50px;
+  padding: 20px;
+  border: 1px solid lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
@@ -21,12 +35,6 @@
 }
 
 .square {
-  width: 60px;
-  height: 60px;
-  border: 4px solid darkslategray;
-  background: skyblue;
-}
-
-.coloured {
-  background: lightcoral;
+  width: 30px;
+  height: 30px;
 }

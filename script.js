@@ -1,33 +1,47 @@
-const FLEX_CONTAINER = document.createElement('div');
-const GRID_CONTAINER = document.createElement('div');
-const CLEAR_BUTTON = document.createElement('button');
+const DEFAULTBG = '#ffffff';
 
-FLEX_CONTAINER.setAttribute("id", "flex-container");
-GRID_CONTAINER.setAttribute("id", "grid-container")
-CLEAR_BUTTON.textContent = "Clear";
-for (let i = 0; i < 16; i +=1) {
-  const row = document.createElement("div");
-  row.classList.toggle("row");
-  for (let j = 0; j < 16; j += 1) {
-    const square = document.createElement('div');
-    square.classList.toggle("square");
-    square.addEventListener("mouseover", () => {
-      square.classList.toggle("coloured");
-    })
-    row.appendChild(square);
+let mouseDown = false;
+document.body.onmousedown = () => mouseDown = true;
+document.body.onmouseup = () => mouseDown = false;
+
+const flexContainer = document.querySelector('#flex-container');
+const gridContainer = document.querySelector('#grid-container');
+const clearBtn = document.querySelector('#clear-btn');
+const sidebar = document.querySelector('#sidebar');
+const colourSelector = document.querySelector('#colour-selector');
+
+const main = () => {
+  clearBtn.addEventListener('click', clearGrid);
+  initGrid();
+}
+const initGrid = () => {
+  for (let i = 0; i < 16; i +=1) {
+    const row = document.createElement("div");
+    row.classList.toggle("row");
+    for (let j = 0; j < 16; j += 1) {
+      const square = document.createElement('div');
+      square.classList.add("square");
+      square.addEventListener("mouseover", changeColour);
+      square.addEventListener("mousedown", changeColour);
+      row.appendChild(square);
+    }
+    gridContainer.appendChild(row);
   }
-  GRID_CONTAINER.appendChild(row);
 }
 
-CLEAR_BUTTON.addEventListener('click', () => {
+const clearGrid = () => {
   const colouredSquares = Array.from(document.querySelectorAll('.coloured'));
-  console.log(colouredSquares);
   colouredSquares.forEach((sq) => {
-    sq.classList.toggle("coloured");
+    sq.style.background = DEFAULTBG;
   })
-})
+}
 
+const changeColour = (e) => {
+  if(!mouseDown && e.type === 'mouseover') return;
+  const colour = colourSelector.value
+  console.log(e.target);
+  e.target.classList.add("coloured");
+  e.target.style.background = colour;
+};
 
-FLEX_CONTAINER.appendChild(GRID_CONTAINER);
-document.body.appendChild(CLEAR_BUTTON);
-document.body.appendChild(FLEX_CONTAINER);
+main();
