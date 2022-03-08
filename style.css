@@ -35,8 +35,11 @@ html {
 }
 
 .square {
-  width: 30px;
-  height: 30px;
+  border: 1px dashed lightgray;
+}
+
+.coloured {
+  border: none;
 }
 
 .menu {
