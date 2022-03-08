@@ -41,6 +41,7 @@ const initGrid = () => {
 const clearGrid = () => {
   const colouredSquares = Array.from(document.querySelectorAll('.coloured'));
   colouredSquares.forEach((sq) => {
+    sq.classList.toggle("coloured");
     sq.style.background = '#ffffff';
   })
 }
